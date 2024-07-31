@@ -2851,6 +2851,10 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 8190207651276908460, guid: 05a7b82f3319ba048893a75fb4ed7644, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: e60201ef3b948c24193650d1c5705593, type: 2}
     - target: {fileID: 8190207651276908462, guid: 05a7b82f3319ba048893a75fb4ed7644, type: 3}
       propertyPath: m_Name
       value: Player
