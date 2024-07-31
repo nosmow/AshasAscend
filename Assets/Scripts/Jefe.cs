@@ -19,10 +19,19 @@ public class Jefe : MonoBehaviour
     [SerializeField] private float radioAtaque;
     [SerializeField] private float dañoAtaque = 20;
 
+
     // Add a public variable for speed
     [Header("Movimiento")]
     public float velocidadMovimiento = 12f;
     
+
+    // Add a public variable for speed
+    [Header("Sound")]
+
+    [SerializeField] private AudioSource soundFX;
+    [SerializeField] private AudioClip attack;
+    [SerializeField] private AudioClip hit;
+
     public void Start()
     {
         animator = GetComponent<Animator>();
@@ -31,6 +40,13 @@ public class Jefe : MonoBehaviour
         barraVidaJefe.InicializadorDeBarraDeVida(vida);
         jugador = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        // Initialize audio source if not set
+        if (soundFX == null)
+        {
+            soundFX = GetComponent<AudioSource>();
+        }
+
     }
 
     private void Update()
@@ -83,8 +99,20 @@ public class Jefe : MonoBehaviour
             {
                 enemy.GetComponent<PlayerController>().TomarDaño(dañoAtaque);
                 Debug.Log("Pegaste a " + enemy.name);
+                soundFX.pitch = Random.Range(0.8f, 1.0f);
+                soundFX.PlayOneShot(hit);
+
             }
         }
+
+
+        // Play the attack sound
+        if (soundFX != null)
+        {
+            soundFX.pitch = Random.Range(0.8f, 1.0f);
+            soundFX.PlayOneShot(attack);
+        }
+
     }
 
     private void OnDrawGizmos()
