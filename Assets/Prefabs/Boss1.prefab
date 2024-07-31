@@ -634,6 +634,8 @@ MonoBehaviour:
   barraVidaJefe: {fileID: 3406314260031443746}
   playerTransform: {fileID: 0}
   velocidadMovimiento: 12
+  attackSound: {fileID: 8300000, guid: 57f3c0f1a6905494fa8133837bf21658, type: 3}
+  hitSound: {fileID: 8300000, guid: 7977e39ce0adf4c4da821fd432acf041, type: 3}
 --- !u!61 &1139450985419597737
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -703,11 +705,11 @@ GameObject:
   - component: {fileID: 2929951084457020594}
   m_Layer: 3
   m_Name: ControladorAtaque
-  m_TagString: Weapon
-  m_Icon: {fileID: 0}
+  m_TagString: BossWeapon
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5952951717010078660
 Transform:
   m_ObjectHideFlags: 0
@@ -730,7 +732,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5952951717010078663}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

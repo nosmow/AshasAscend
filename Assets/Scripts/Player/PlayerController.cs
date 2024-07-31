@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject attackEffectPrefab;
     public GameObject jumpEffectPrefab;
     public AudioClip attackSound;
+    public AudioClip hitSound;
     private float siguienteAtaque;
     private Rigidbody2D playerRb;
     private Animator animator;
@@ -60,11 +61,12 @@ public class PlayerController : MonoBehaviour
         // Instantiate the attack effect
         if (attackEffectPrefab != null)
         {
-            GameObject effect = Instantiate(attackEffectPrefab, puntoDeAtaque.transform.position, Quaternion.identity);
-            Destroy(effect, 2f); // Adjust the duration to match your particle effect's length
+            //GameObject effect = Instantiate(attackEffectPrefab, puntoDeAtaque.transform.position, Quaternion.identity);
+            //Destroy(effect, 2f); // Adjust the duration to match your particle effect's length
         }
 
-        // Play the attack sound
+
+        AudioManager.Instance.PlaySound(attackSound);
         
     }
 
@@ -110,11 +112,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter2D(Collider2D other) {
 
+        if(other.gameObject.CompareTag("BossWeapon"))
+        {
+            vidaPlayer -= Estadisticas.Instance.Daño();
+            AudioManager.Instance.PlaySound(hitSound);
+//            Debug.Log("Player recibe golpe de boss");
+        }
         if(other.gameObject.CompareTag("Weapon"))
         {
             vidaPlayer -= Estadisticas.Instance.Daño();
+            AudioManager.Instance.PlaySound(hitSound);
+//            Debug.Log("Player recibe golpe de Kunai");
         }
+        
+
     }
 }
