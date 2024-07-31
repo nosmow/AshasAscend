@@ -57,12 +57,22 @@ public class Jefe : MonoBehaviour
 
     public void MirarJugador()
     {
-        if ((jugador.position.x > transform.position.x && !mirandoDerecha) || (jugador.position.x < transform.position.x && mirandoDerecha))
+        // Calculate the difference in position X between the Boss and the player
+        float diferenciaX = jugador.position.x - transform.position.x;
+
+        // Check if the Boss needs to turn around
+        bool shouldTurn = (diferenciaX > 0 && !mirandoDerecha) || (diferenciaX < 0 && mirandoDerecha);
+
+        if (shouldTurn)
         {
+            // Reverse the gaze direction
             mirandoDerecha = !mirandoDerecha;
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+
+            // Rotate the Boss 180 degrees on the Y axis
+            transform.Rotate(0, 180, 0);
         }
     }
+
 
     public void Ataque()
     {
