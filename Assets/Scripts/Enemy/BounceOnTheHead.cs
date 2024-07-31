@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BounceOnTheHead : MonoBehaviour
 {
-    public float pushForce = 2f;
+    public float pushForce = 2f;  // Horizontal thrust force
+    public float jumpForce = 5f;  // Small jump strength
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -14,11 +15,11 @@ public class BounceOnTheHead : MonoBehaviour
 
             if (playerRb2d != null)
             {
-                // Calcula la dirección del empuje basado en la escala del jugador
+                // Calculates the thrust direction based on the player's scale
                 Vector2 pushDirection = collision.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
-                // Aplica la fuerza al jugador
-                playerRb2d.velocity = new Vector2(pushDirection.x * pushForce, playerRb2d.velocity.y);
+                // Apply force to the player, including the small jump
+                playerRb2d.velocity = new Vector2(pushDirection.x * pushForce, jumpForce);
             }
         }
     }
