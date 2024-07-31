@@ -1,71 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float tamañoRayCast, speedPlayer, ataquePorSec, vidaPlayer;
+    [Header("Player Settings")]
+    public float sizeRayCast = 0.2f;
+    public float speedPlayer = 5f;
+    public float ataquePorSec = 1f;
+    public float vidaPlayer = 100f;
     public float rangoDeAtaque = 1.5f;
-    public LayerMask enemyLayer;
-    private float movimientoHorizontal;
+
+    [Header("References")]
+    public GameObject detectorSuelo;
+    public GameObject puntoDeAtaque;
+
+    [Header("Special Effects")]
+    public GameObject attackEffectPrefab;
+    public GameObject jumpEffectPrefab;
+    public AudioClip attackSound;
+    private float siguienteAtaque;
     private Rigidbody2D playerRb;
     private Animator animator;
-    private float siguienteAtaque;
-    [SerializeField] private float inputHorizontal;
-    [SerializeField] GameObject detectorSuelo, puntoDeAtaque;
-    [SerializeField] LayerMask layer;
-    [SerializeField] private BarraVidaJefe barraVidaPlayer;
-    [SerializeField] bool dejarSaltar = false;
-    [SerializeField] private float cooldownSalto;
-    [SerializeField] private Jefe jefe;
-
-    // New variables for special effects
-    [SerializeField] private GameObject attackEffectPrefab;
-    [SerializeField] private GameObject jumpEffectPrefab;
-    [SerializeField] private AudioSource attackSound;
+    private bool dejarSaltar = false;
 
     void Start()
     {
         detectorSuelo = GameObject.Find("DetectorSuelo");
-        Physics2D.gravity *= 2;
         playerRb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        vidaPlayer = Estadisticas.Instance.vidaMaxima;
-        barraVidaPlayer.InicializadorDeBarraDeVida(vidaPlayer);
-        jefe = GameObject.FindGameObjectWithTag("Boss").GetComponent<Jefe>();
 
-        // Initialize audio source if not set
-        if (attackSound == null)
-        {
-            attackSound = GetComponent<AudioSource>();
-        }
+        // Ensure gravity is set
+        Physics2D.gravity *= 2;
     }
 
     void Update()
     {
-        inputHorizontal = Input.GetAxis("Horizontal");
-        if (Time.time >= siguienteAtaque)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                PlayerAttack();
-                siguienteAtaque = Time.time + 1f / ataquePorSec;
-            }
-        }
-
+        HandleInput();
         Salto();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         Movimiento();
+    }
+
+    private void HandleInput()
+    {
+        if (Time.time >= siguienteAtaque && Input.GetButtonDown("Fire1"))
+        {
+            PlayerAttack();
+            siguienteAtaque = Time.time + 1f / ataquePorSec;
+        }
     }
 
     private void PlayerAttack()
     {
         animator.SetTrigger("Attack");
-        
-        // Instantiate the attack effect at the attack point and destroy it after a delay
+
+        // Instantiate the attack effect
         if (attackEffectPrefab != null)
         {
             GameObject effect = Instantiate(attackEffectPrefab, puntoDeAtaque.transform.position, Quaternion.identity);
@@ -73,91 +65,56 @@ public class PlayerController : MonoBehaviour
         }
 
         // Play the attack sound
-        if (attackSound != null)
-        {
-            attackSound.Play();
-        }
-
-        Collider2D[] pegarEnemigos = Physics2D.OverlapCircleAll(puntoDeAtaque.transform.position, rangoDeAtaque, enemyLayer);
-        foreach (Collider2D enemy in pegarEnemigos)
-        {
-            jefe.TomarDaño(Estadisticas.Instance.dañoPlayer);
-            Debug.Log("Pegaste a " + enemy.name);
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (puntoDeAtaque == null)
-            return;
-
-        Gizmos.DrawWireSphere(puntoDeAtaque.transform.position, rangoDeAtaque);
-    }
-
-    public void TomarDaño(float daño)
-    {
-        vidaPlayer -= daño;
-        barraVidaPlayer.CambiarVidaActual(vidaPlayer);
-        if (vidaPlayer <= 0)
-        {
-            animator.SetTrigger("Die");
-        }
+        
     }
 
     private void Movimiento()
     {
-        inputHorizontal = Input.GetAxis("Horizontal");
+        float inputHorizontal = Input.GetAxis("Horizontal");
+        animator.SetBool("Run", inputHorizontal != 0);
+        animator.SetBool("Idle", inputHorizontal == 0);
+
         if (inputHorizontal != 0)
         {
-            animator.SetBool("Run", true);
-            animator.SetBool("Idle", false);
-            float movimientoVertical = playerRb.velocity.y;
-            movimientoHorizontal = inputHorizontal * speedPlayer;
-            Vector2 movimiento = new Vector2(movimientoHorizontal * speedPlayer, movimientoVertical);
-
+            Vector2 movimiento = new Vector2(inputHorizontal * speedPlayer, playerRb.velocity.y);
             playerRb.velocity = movimiento;
 
-            if (inputHorizontal > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            if (inputHorizontal < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-        }
-        else
-        {
-            animator.SetBool("Run", false);
-            animator.SetBool("Idle", true);
+            // Flip character
+            transform.localScale = new Vector3(Mathf.Sign(inputHorizontal), 1, 1);
         }
     }
 
+
     private void Salto()
     {
-        Debug.DrawLine(detectorSuelo.transform.position, detectorSuelo.transform.position + Vector3.down * tamañoRayCast, Color.red);
-        if (Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, tamañoRayCast, layer))
+        Debug.DrawLine(detectorSuelo.transform.position, detectorSuelo.transform.position + Vector3.down * sizeRayCast, Color.red);
+
+        RaycastHit2D hit = Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, sizeRayCast, LayerMask.GetMask("Suelo"));
+        if (hit.collider != null)
         {
             dejarSaltar = true;
-            if (Input.GetKeyDown(KeyCode.Space) && dejarSaltar != false)
+            if (Input.GetKeyDown(KeyCode.Space) && dejarSaltar)
             {
-                if (jumpEffectPrefab != null)
-                {
-                    GameObject effect = Instantiate(jumpEffectPrefab, transform.position - new Vector3(0,1.3f,0), Quaternion.identity);
-                    Destroy(effect, 2.0f); // Adjust the duration to match your particle effect's length
-                }
                 dejarSaltar = false;
                 animator.SetBool("Idle", false);
                 playerRb.AddForce(Vector2.up * Estadisticas.Instance.jumpForce, ForceMode2D.Impulse);
                 animator.SetTrigger("Jump");
 
-                // Instantiate the jump effect at the player's position and destroy it after a delay
-                /*if (jumpEffectPrefab != null)
+                // Instanciar el efecto de salto
+                if (jumpEffectPrefab != null)
                 {
-                    GameObject effect = Instantiate(jumpEffectPrefab, transform.position, Quaternion.identity);
-                    Destroy(effect, 2f); // Adjust the duration to match your particle effect's length
-                }*/
+                    GameObject effect = Instantiate(jumpEffectPrefab, transform.position - new Vector3(0, 1.3f, 0), Quaternion.identity);
+                    Destroy(effect, 2f); // Ajusta la duración para que coincida con la longitud de tu efecto de partículas
+                }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+
+        if(other.gameObject.CompareTag("Weapon"))
+        {
+            vidaPlayer -= Estadisticas.Instance.Daño();
         }
     }
 }

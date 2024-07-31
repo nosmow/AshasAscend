@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8190207651276908461}
   - component: {fileID: 8190207651276908465}
   - component: {fileID: 8190207651276908464}
-  - component: {fileID: 4711732878250790021}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -161,39 +160,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb936cc9a94d1e40a7a6dc2045f9562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "tama\xF1oRayCast": 0.15
+  sizeRayCast: 1
   speedPlayer: 3
-  ataquePorSec: 3
+  ataquePorSec: 2
   vidaPlayer: 0
   rangoDeAtaque: 0.66
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  inputHorizontal: 0
   detectorSuelo: {fileID: 8190207651727089331}
   puntoDeAtaque: {fileID: 8190207651341286905}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  barraVidaPlayer: {fileID: 0}
-  dejarSaltar: 0
-  cooldownSalto: 0
-  jefe: {fileID: 0}
---- !u!114 &4711732878250790021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8190207651276908462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e3632f8037a6814a84d7bd9d8b70d99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 7
-  "da\xF1oPlayer": 15
-  vidaMaxima: 90
+  attackEffectPrefab: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
+  jumpEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
+  attackSound: {fileID: 0}
 --- !u!1 &8190207651341286905
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,10 +179,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8190207651341286904}
+  - component: {fileID: 4273858527539712118}
   m_Layer: 7
   m_Name: PuntoDeAtaque
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: Weapon
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -225,6 +202,22 @@ Transform:
   m_Father: {fileID: 8190207651276908466}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4273858527539712118
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190207651341286905}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &8190207651727089331
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,11 +227,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8190207651727089330}
-  - component: {fileID: 8190207651727089329}
   m_Layer: 7
   m_Name: DetectorSuelo
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -257,29 +249,3 @@ Transform:
   m_Father: {fileID: 8190207651276908466}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8190207651727089329
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8190207651727089331}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.07088995, y: 0.050951958}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.2835588, y: 0.1448927}
-  m_EdgeRadius: 0
