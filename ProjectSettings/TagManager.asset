@@ -10,6 +10,7 @@ TagManager:
   - Manager
   - Suelo
   - Boss
+  - Vitality
   layers:
   - Default
   - TransparentFX
