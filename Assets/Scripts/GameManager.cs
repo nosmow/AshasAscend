@@ -122,6 +122,3 @@ public class GameManager : MonoBehaviour
         indicadores[indicatorIndex].SetActive(false);
     }
 }
-
-
-
