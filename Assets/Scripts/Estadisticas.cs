@@ -10,6 +10,7 @@ public class Estadisticas : MonoBehaviour
     
 
     public float jumpForce = 7, dañoPlayer = 15, vidaMaxima = 90;
+    public float ataqueRecibido;
        private void Awake()
     {
         if (Instance != null)
@@ -36,14 +37,12 @@ public class Estadisticas : MonoBehaviour
     {
         vidaMaxima += amount;
     }
-    void Start()
+    public float Daño()
     {
-        
+        return ataqueRecibido;
     }
-
-    // Update is called once per frame
-    void Update()
+    public float DañoAEnemigos()
     {
-        
+        return dañoPlayer;
     }
 }

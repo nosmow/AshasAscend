@@ -20,7 +20,7 @@ public class JefeCaminarBehaviour : StateMachineBehaviour
         jefe.MirarJugador();
 
         // Get the player's position
-        Vector2 playerPosition = jefe.GetPlayerTransform().position;
+        Vector2 playerPosition = jefe.playerTransform.position;
 
         // Calculate direction towards the player on the x-axis
         float directionX = playerPosition.x - animator.transform.position.x;

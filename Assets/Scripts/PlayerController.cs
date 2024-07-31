@@ -1,27 +1,23 @@
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float sizeRayCast = 1f;
+    public float sizeRayCast = 0.2f;
     public float speedPlayer = 5f;
     public float ataquePorSec = 1f;
     public float vidaPlayer = 100f;
     public float rangoDeAtaque = 1.5f;
 
     [Header("References")]
-    public LayerMask enemyLayer;
     public GameObject detectorSuelo;
     public GameObject puntoDeAtaque;
-    public LayerMask layer;
-    public BarraVidaJefe barraVidaPlayer;
-    public Jefe jefe;
 
     [Header("Special Effects")]
     public GameObject attackEffectPrefab;
     public GameObject jumpEffectPrefab;
-    public AudioSource attackSound;
-
+    public AudioClip attackSound;
     private float siguienteAtaque;
     private Rigidbody2D playerRb;
     private Animator animator;
@@ -32,20 +28,9 @@ public class PlayerController : MonoBehaviour
         detectorSuelo = GameObject.Find("DetectorSuelo");
         playerRb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        jefe = GameObject.FindGameObjectWithTag("Boss").GetComponent<Jefe>();
-
-        // Initialize player stats
-        vidaPlayer = Estadisticas.Instance.vidaMaxima;
-        barraVidaPlayer.InicializadorDeBarraDeVida(vidaPlayer);
 
         // Ensure gravity is set
         Physics2D.gravity *= 2;
-
-        // Initialize audio source if not set
-        if (attackSound == null)
-        {
-            attackSound = GetComponent<AudioSource>();
-        }
     }
 
     void Update()
@@ -80,14 +65,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Play the attack sound
-        attackSound?.Play();
-
-        Collider2D[] pegarEnemigos = Physics2D.OverlapCircleAll(puntoDeAtaque.transform.position, rangoDeAtaque, enemyLayer);
-        foreach (Collider2D enemy in pegarEnemigos)
-        {
-            jefe.TomarDaño(Estadisticas.Instance.dañoPlayer);
-            Debug.Log("Pegaste a " + enemy.name);
-        }
+        
     }
 
     private void Movimiento()
@@ -111,12 +89,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.DrawLine(detectorSuelo.transform.position, detectorSuelo.transform.position + Vector3.down * sizeRayCast, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, sizeRayCast, layer);
+        RaycastHit2D hit = Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, sizeRayCast, LayerMask.GetMask("Suelo"));
         if (hit.collider != null)
         {
-            // Debug para mostrar el objeto que está tocando el rayo
-            Debug.Log("El rayo está tocando: " + hit.collider.name);
-
             dejarSaltar = true;
             if (Input.GetKeyDown(KeyCode.Space) && dejarSaltar)
             {
@@ -135,21 +110,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TomarDaño(float daño)
-    {
-        vidaPlayer -= daño;
-        barraVidaPlayer.CambiarVidaActual(vidaPlayer);
-        if (vidaPlayer <= 0)
-        {
-            animator.SetTrigger("Die");
-        }
-    }
+    private void OnTriggerEnter(Collider other) {
 
-    private void OnDrawGizmosSelected()
-    {
-        if (puntoDeAtaque != null)
+        if(other.gameObject.CompareTag("Weapon"))
         {
-            Gizmos.DrawWireSphere(puntoDeAtaque.transform.position, rangoDeAtaque);
+            vidaPlayer -= Estadisticas.Instance.Daño();
         }
     }
 }

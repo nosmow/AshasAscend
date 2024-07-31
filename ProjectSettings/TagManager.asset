@@ -11,6 +11,7 @@ TagManager:
   - Suelo
   - Boss
   - Vitality
+  - Weapon
   layers:
   - Default
   - TransparentFX
