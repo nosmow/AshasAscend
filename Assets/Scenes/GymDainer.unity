@@ -1214,6 +1214,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &548578254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5952951716489544014, guid: aa610b550a2b5db40bc97a029330de3b, type: 3}
+  m_PrefabInstance: {fileID: 904914152}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &574764637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,7 +1599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listaKunais: []
   kunaiPrefab: {fileID: 8835283084936854813, guid: b531145a6877dc6448026d49426bb0a5, type: 3}
-  spawnKunai: {fileID: 0}
+  spawnKunai: {fileID: 548578254}
   "tama\xF1oList": 5
 --- !u!4 &1004222102
 Transform:
@@ -3122,6 +3127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3632f8037a6814a84d7bd9d8b70d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 8
+  jumpForce: 12
   "da\xF1oPlayer": 15
   vidaMaxima: 90

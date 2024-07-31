@@ -1,89 +1,62 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using TMPro;
 
 public class VolumeControl : MonoBehaviour
 {
     public Slider volumeSlider;
-    public Button volumeButton;
-    public Button muteButton; // Button for mute toggle
-    public Toggle muteCheckbox; // Checkbox to show mute state
-    public GameObject volumeSliderUI; // Reference to the Slider UI GameObject
+    public Slider sfxSlider;
+
     public AudioMixer audioMixer; // Reference to the AudioMixer
 
-    private bool isMuted = false; // Track mute state
+    private const string MusicVolumeKey = "musicVolume";
+    private const string SFXVolumeKey = "SFXVolume";
+    private const float VolumeThreshold = 0.0001f; // Epsilon value to avoid logarithm problems
 
     void Start()
     {
-        // Initialize the slider with the current volume
-        float volume;
-        audioMixer.GetFloat("Volume", out volume);
-        volumeSlider.value = Mathf.Pow(10, volume / 20); // Convert dB to linear
-
-        // Add listeners for the slider and buttons
-        volumeSlider.onValueChanged.AddListener(SetVolume);
-        muteButton.onClick.AddListener(ToggleMute);
-        muteCheckbox.onValueChanged.AddListener(ToggleMuteFromCheckbox);
-
-        // Initialize the mute button state
-        UpdateMuteButton();
-    }
-
-    public void SetVolume(float sliderValue)
-    {
-        if (isMuted)
-            return;
-
-        // Convert the slider value to dB and set the volume in the AudioMixer
-        float volume = Mathf.Lerp(-60f, 0f, sliderValue);
-        audioMixer.SetFloat("Volume", volume);
-    }
-
-    public void ToggleMute()
-    {
-        isMuted = !isMuted;
-
-        if (isMuted)
+        LoadVolume();
+        // Event for the slider
+        if (volumeSlider != null)
         {
-            // Set the AudioMixer to mute
-            audioMixer.SetFloat("Volume", -80f); // Use -80 dB or another low value to simulate mute
-        }
-        else
-        {
-            // Restore volume level based on slider value
-            float sliderValue = volumeSlider.value;
-            float volume = Mathf.Lerp(-60f, 0f, sliderValue);
-            audioMixer.SetFloat("Volume", volume);
+            volumeSlider.onValueChanged.AddListener(delegate { SetVolume("music", MusicVolumeKey, volumeSlider.value); });
         }
 
-        UpdateMuteButton();
+        if (sfxSlider != null)
+        {
+            sfxSlider.onValueChanged.AddListener(delegate { SetVolume("sfx", SFXVolumeKey, sfxSlider.value); });
+        }
     }
 
-    public void ToggleMuteFromCheckbox(bool isChecked)
+    private void SetVolume(string parameterName, string prefsKey, float sliderValue)
     {
-        isMuted = isChecked;
-
-        if (isMuted)
-        {
-            // Set the AudioMixer to mute
-            audioMixer.SetFloat("Volume", -80f); // Use -80 dB or another low value to simulate mute
-        }
-        else
-        {
-            // Restore volume level based on slider value
-            float sliderValue = volumeSlider.value;
-            float volume = Mathf.Lerp(-60f, 0f, sliderValue);
-            audioMixer.SetFloat("Volume", volume);
-        }
-
-        UpdateMuteButton();
+        float volume = sliderValue > VolumeThreshold ? Mathf.Log10(sliderValue) * 20 : -80;
+        audioMixer.SetFloat(parameterName, volume);
+        PlayerPrefs.SetFloat(prefsKey, sliderValue);
     }
 
-    private void UpdateMuteButton()
+    private void LoadVolume()
     {
-        if (muteCheckbox != null)
+        if (PlayerPrefs.HasKey(MusicVolumeKey))
         {
-            muteCheckbox.isOn = isMuted;
+            if (volumeSlider != null)
+            {
+                float musicVolume = PlayerPrefs.GetFloat(MusicVolumeKey);
+                volumeSlider.value = musicVolume;
+                SetVolume("music", MusicVolumeKey, musicVolume);
+            } 
+        }
+
+        if (PlayerPrefs.HasKey(SFXVolumeKey))
+        {
+            if (sfxSlider != null)
+            {
+                float sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey);
+                sfxSlider.value = sfxVolume;
+                SetVolume("sfx", SFXVolumeKey, sfxVolume);
+            }
+            
         }
     }
 }
