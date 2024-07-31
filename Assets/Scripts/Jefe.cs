@@ -10,12 +10,14 @@ public class Jefe : MonoBehaviour
     [SerializeField] private Slider barraVidaJefe;
     private bool mirandoDerecha = true;
     public Transform playerTransform;
-
     // Add a public variable for speed
     [Header("Movimiento")]
     public float velocidadMovimiento = 12f;
     float distanciaJugador;
-    
+    [Header("Special Effects")]
+    public AudioClip attackSound;
+    public AudioClip hitSound;
+
     public void Start()
     {
         vida = maximaVida;
@@ -58,10 +60,17 @@ public class Jefe : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         
-        if(other.gameObject.CompareTag("Weapon"))
+        if(other.gameObject.CompareTag("PlayerWeapon"))
         {
             vida -= Estadisticas.Instance.DañoAEnemigos();
+            AudioManager.Instance.PlaySound(hitSound);
+//            Debug.Log("Boss recibe golpe de player");
         }
+
     }
 
+    public void PlaySound(AudioClip clip)
+    {
+        AudioManager.Instance.PlaySound(clip);
+    }
 }

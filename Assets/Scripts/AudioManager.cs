@@ -3,8 +3,13 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
 
-public class VolumeControl : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
+
+    public static AudioManager Instance { get; private set; }
+    
+    private AudioSource audioSource;
+
     public Slider volumeSlider;
     public Slider sfxSlider;
 
@@ -14,6 +19,20 @@ public class VolumeControl : MonoBehaviour
     private const string SFXVolumeKey = "SFXVolume";
     private const float VolumeThreshold = 0.0001f; // Epsilon value to avoid logarithm problems
 
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            audioSource = GetComponent<AudioSource>();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         LoadVolume();
@@ -58,5 +77,9 @@ public class VolumeControl : MonoBehaviour
             }
             
         }
+    }
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

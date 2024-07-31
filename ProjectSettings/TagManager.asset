@@ -12,6 +12,8 @@ TagManager:
   - Boss
   - Vitality
   - Weapon
+  - PlayerWeapon
+  - BossWeapon
   layers:
   - Default
   - TransparentFX

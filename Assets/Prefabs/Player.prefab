@@ -106,7 +106,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e60201ef3b948c24193650d1c5705593, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -163,13 +163,14 @@ MonoBehaviour:
   sizeRayCast: 1
   speedPlayer: 3
   ataquePorSec: 2
-  vidaPlayer: 0
+  vidaPlayer: 100
   rangoDeAtaque: 0.66
   detectorSuelo: {fileID: 8190207651727089331}
   puntoDeAtaque: {fileID: 8190207651341286905}
   attackEffectPrefab: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   jumpEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 57f3c0f1a6905494fa8133837bf21658, type: 3}
+  hitSound: {fileID: 8300000, guid: 7977e39ce0adf4c4da821fd432acf041, type: 3}
 --- !u!1 &8190207651341286905
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ GameObject:
   - component: {fileID: 4273858527539712118}
   m_Layer: 7
   m_Name: PuntoDeAtaque
-  m_TagString: Weapon
+  m_TagString: PlayerWeapon
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,13 +210,13 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8190207651341286905}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.4, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!1 &8190207651727089331
