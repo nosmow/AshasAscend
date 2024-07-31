@@ -2347,7 +2347,7 @@ GameObject:
   - component: {fileID: 1712753770}
   - component: {fileID: 1712753771}
   m_Layer: 6
-  m_Name: Suelo
+  m_Name: Pared1
   m_TagString: Suelo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2377,7 +2377,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1712753769}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 144d7a11c34a6db46afb1d3269f7b97a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2405,7 +2405,7 @@ GameObject:
   - component: {fileID: 1747112889}
   - component: {fileID: 1747112890}
   m_Layer: 6
-  m_Name: Suelo
+  m_Name: Pared2
   m_TagString: Suelo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2435,7 +2435,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1747112888}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 144d7a11c34a6db46afb1d3269f7b97a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -3127,6 +3127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3632f8037a6814a84d7bd9d8b70d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 12
-  "da\xF1oPlayer": 15
-  vidaMaxima: 90
+  jumpForce: 10
+  "da\xF1oPlayer": 0
+  vidaMaxima: 100
