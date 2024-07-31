@@ -12,6 +12,8 @@ TagManager:
   - Boss
   - Vitality
   - Weapon
+  - strenght
+  - agility
   layers:
   - Default
   - TransparentFX
