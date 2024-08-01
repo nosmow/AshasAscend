@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3632f8037a6814a84d7bd9d8b70d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 13
-  "da\xF1oPlayer": 15
-  vidaMaxima: 90
-  ataqueRecibido: 15
+  jumpForce: 0
+  "da\xF1oPlayer": 0
+  vidaMaxima: 0
+  ataqueRecibido: 0
