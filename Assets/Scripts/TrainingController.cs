@@ -22,6 +22,8 @@ public class TrainingController : MonoBehaviour
                 tiempoTerminado = true;
 
                 progressButton.SetActive(true);
+                FindAnyObjectByType<PlayerController>().enabled = false;
+                FindFirstObjectByType<AbilityManagement>().enabled = false;
             }
 
             tiempoText.text = "Tiempo: " + Mathf.Ceil(tiempo).ToString("0"); // Actualizar el texto del temporizador

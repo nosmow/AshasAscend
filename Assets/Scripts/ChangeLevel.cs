@@ -7,17 +7,17 @@ public class ChangeLevel : MonoBehaviour
 {
     void Start()
     {
-        
+
     }
 
-   
+
     void Update()
     {
-        
+
     }
-public void change(int Level1)
-{
-    SceneManager.LoadScene(Level1);
-}
+    public void change(int Level1)
+    {
+        SceneManager.LoadScene(Level1);
+    }
 
 }

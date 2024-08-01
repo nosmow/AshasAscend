@@ -7,11 +7,11 @@ public class Estadisticas : MonoBehaviour
 
     public static Estadisticas Instance { get; private set; }
 
-    
+    public float jumpForce = 0, dañoPlayer = 0, vidaMaxima = 0;
+    public float ataqueRecibido = 15;
 
-    public float jumpForce = 7, dañoPlayer = 15, vidaMaxima = 90;
-    public float ataqueRecibido;
-       private void Awake()
+
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -25,18 +25,28 @@ public class Estadisticas : MonoBehaviour
     }
     public void IncrementJumpForce(int amount)
     {
-        jumpForce += amount;
+        if (jumpForce < 10)
+        {
+            jumpForce += amount;
+        }
     }
 
     public void IncrementDañoPlayer(int amount)
     {
-        dañoPlayer += amount;
+        if (dañoPlayer < 30)
+        {
+            dañoPlayer += amount;
+        }
     }
 
     public void IncrementVidaMaxima(int amount)
     {
-        vidaMaxima += amount;
+        if (vidaMaxima < 200)
+        {
+            vidaMaxima += amount;
+        }
     }
+
     public float Daño()
     {
         return ataqueRecibido;
