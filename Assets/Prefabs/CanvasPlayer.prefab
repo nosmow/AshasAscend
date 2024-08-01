@@ -833,6 +833,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseButton: {fileID: 1568938349808679706}
   menuPauseButton: {fileID: 7357687323746908696}
+  volumeSlider: {fileID: 6101905063928096677}
+  sfxSlider: {fileID: 4675865660934796084}
 --- !u!1 &3171580244540272772
 GameObject:
   m_ObjectHideFlags: 0
