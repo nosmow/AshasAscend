@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8190207651276908461}
   - component: {fileID: 8190207651276908465}
   - component: {fileID: 8190207651276908464}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -165,6 +165,7 @@ MonoBehaviour:
   ataquePorSec: 2
   vidaPlayer: 100
   rangoDeAtaque: 0.66
+  sliderVidaPlayer: {fileID: 0}
   detectorSuelo: {fileID: 8190207651727089331}
   puntoDeAtaque: {fileID: 8190207651341286905}
   attackEffectPrefab: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
@@ -181,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8190207651341286904}
   - component: {fileID: 4273858527539712118}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PuntoDeAtaque
   m_TagString: PlayerWeapon
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -228,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8190207651727089330}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DetectorSuelo
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}

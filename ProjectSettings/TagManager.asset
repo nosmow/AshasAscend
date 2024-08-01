@@ -3,12 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerWeapon
+  - Boss
+  - BossWeapon
+  - Manager
+  - Suelo
+  - agility
+  - strenght
+  - Vitality
+  - Kunai
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Suelo
   - Water
   - UI
   - 

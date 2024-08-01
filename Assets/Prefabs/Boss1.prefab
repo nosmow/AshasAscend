@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5557105303286150821}
   - component: {fileID: 5502233339944853932}
   - component: {fileID: 870156081}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 1955353906275175617}
   - component: {fileID: 3049764380325527004}
   - component: {fileID: 2620666270630017048}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4402054834922049113}
   - component: {fileID: 3264057930805860437}
   - component: {fileID: 8612396495258602324}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6751483078174395008}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 2788265094912366408}
   - component: {fileID: 5199391773864788291}
   - component: {fileID: 8653157020543769899}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3518965322511366757}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 1562914812627688479}
   - component: {fileID: 1595374325169883460}
   - component: {fileID: 7967973264705563358}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: BarraVida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 5952951715755802913}
   - component: {fileID: 5952951715755802917}
   - component: {fileID: 1139450985419597737}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Boss1
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -671,7 +671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5952951716489544015}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SpawnerKunai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5952951717010078660}
   - component: {fileID: 2929951084457020594}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ControladorAtaque
   m_TagString: BossWeapon
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -751,7 +751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7888927502255754735}
   - component: {fileID: 3406314260031443746}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

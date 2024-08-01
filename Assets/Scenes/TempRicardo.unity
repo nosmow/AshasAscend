@@ -1743,7 +1743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1441353098}
   - component: {fileID: 1441353097}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Suelo
   m_TagString: Suelo
   m_Icon: {fileID: 0}
