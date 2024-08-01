@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
             //Destroy(effect, 2f); // Adjust the duration to match your particle effect's length
         }
 
-
         AudioManager.Instance.PlaySound(attackSound);
 
     }
@@ -151,8 +150,11 @@ public class PlayerController : MonoBehaviour
                 {
                     sliderVidaPlayer.value = vidaPlayer;
                 }
-                StartCoroutine(FeedbackDamage());
                 AudioManager.Instance.PlaySound(hitSound);
+
+                StartCoroutine(FeedbackDamage());
+
+                
             }
         }
         catch
