@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4527868992974677222}
   - component: {fileID: 4527868992974677223}
+  - component: {fileID: 522874541}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,3 +49,20 @@ MonoBehaviour:
   "da\xF1oPlayer": 15
   vidaMaxima: 90
   ataqueRecibido: 15
+--- !u!114 &522874541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527868992974677216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12b1762fd75a5f4ea692cd632853df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicScene0: {fileID: 8300000, guid: 3308386052823a94e8b7ffe237d1c647, type: 3}
+  musicScene1: {fileID: 8300000, guid: 31d2d12e8fefe8f41bb2608ceabdfabe, type: 3}
+  musicScene2: {fileID: 8300000, guid: 2ba03e5585559cb48908fff4f695330f, type: 3}
+  musicScene3: {fileID: 8300000, guid: bd5ea59884a2bee4d8f530cfbeb203c2, type: 3}
+  musicScene4: {fileID: 8300000, guid: 20ca1bd77f6c8d64e880d6ebdf0cc722, type: 3}
