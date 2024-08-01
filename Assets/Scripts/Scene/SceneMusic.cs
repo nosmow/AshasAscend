@@ -39,14 +39,17 @@ public class SceneMusic : MonoBehaviour
             case "02_Level1":
                 AudioManager.Instance.StopMusic();
                 AudioManager.Instance.PlayMusic(musicScene2);
+                Estadisticas.Instance.ataqueRecibido = 15f;
                 break;
             case "03_Level2":
                 AudioManager.Instance.StopMusic();
                 AudioManager.Instance.PlayMusic(musicScene3);
+                Estadisticas.Instance.ataqueRecibido = 20f;
                 break;
             case "04_Level":
                 AudioManager.Instance.StopMusic();
                 AudioManager.Instance.PlayMusic(musicScene4);
+                Estadisticas.Instance.ataqueRecibido = 25f;
                 break;               
             default:
                 break;

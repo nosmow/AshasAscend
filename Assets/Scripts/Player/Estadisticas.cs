@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Estadisticas : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Estadisticas : MonoBehaviour
     public static Estadisticas Instance { get; private set; }
 
     public float jumpForce = 0, dañoPlayer = 0, vidaMaxima = 0;
-    public float ataqueRecibido = 15;
+    public float ataqueRecibido = 15f;
 
 
     private void Awake()

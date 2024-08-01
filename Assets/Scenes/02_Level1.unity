@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &156621013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1568938349808679706, guid: 23c439beca2b834499dd5c314ea3dda5, type: 3}
+  m_PrefabInstance: {fileID: 445003679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &206743747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,6 +181,14 @@ PrefabInstance:
     - target: {fileID: 4527868992974677222, guid: 33b573d1fae567a4d8147b084b331358, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527868992974677223, guid: 33b573d1fae567a4d8147b084b331358, type: 3}
+      propertyPath: jumpForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527868992974677223, guid: 33b573d1fae567a4d8147b084b331358, type: 3}
+      propertyPath: vidaMaxima
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33b573d1fae567a4d8147b084b331358, type: 3}
@@ -842,7 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelCambioEscena: {fileID: 984846911}
   panelLose: {fileID: 1945176064}
-  buttonPause: {fileID: 0}
+  buttonPause: {fileID: 156621013}
 --- !u!4 &1249529402
 Transform:
   m_ObjectHideFlags: 0

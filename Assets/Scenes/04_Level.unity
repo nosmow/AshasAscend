@@ -798,6 +798,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &920044501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1568938349808679706, guid: 23c439beca2b834499dd5c314ea3dda5, type: 3}
+  m_PrefabInstance: {fileID: 920044499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &920044502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1607616903913532244, guid: 23c439beca2b834499dd5c314ea3dda5, type: 3}
+  m_PrefabInstance: {fileID: 920044499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &920044503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3171580244617459631, guid: 23c439beca2b834499dd5c314ea3dda5, type: 3}
+  m_PrefabInstance: {fileID: 920044499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &943583355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,8 +1086,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cfd880ce222674fb0dd7db56205aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelCambioEscena: {fileID: 0}
-  panelLose: {fileID: 0}
+  panelCambioEscena: {fileID: 920044502}
+  panelLose: {fileID: 920044503}
+  buttonPause: {fileID: 920044501}
 --- !u!4 &1586700562
 Transform:
   m_ObjectHideFlags: 0
