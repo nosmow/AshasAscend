@@ -1,12 +1,12 @@
+using System.Collections;
 using System.Linq;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float sizeRayCast = 0.2f;
+    public float sizeRayCast = 0.1f;
     public float speedPlayer = 5f;
     public float ataquePorSec = 1f;
     public float vidaPlayer = 100f;
@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool dejarSaltar = false;
 
+    public Material whiteMaterial;
+    private Material originalMaterial;
+    private SpriteRenderer spriteRenderer;
+
+    private static bool gravityModified = false;
+
     void Start()
     {
         detectorSuelo = GameObject.Find("DetectorSuelo");
@@ -38,10 +44,17 @@ public class PlayerController : MonoBehaviour
             sliderVidaPlayer.maxValue = vidaPlayer;
             sliderVidaPlayer.value = vidaPlayer;
         }
-        
+
 
         // Ensure gravity is set
-        Physics2D.gravity *= 2;
+        if (!gravityModified)
+        {
+            Physics2D.gravity *= 2;
+            gravityModified = true;
+        }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
     }
 
     void Update()
@@ -57,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Time.time >= siguienteAtaque && Input.GetButtonDown("Fire1"))
+        if (Time.time >= siguienteAtaque && Input.GetKeyDown(KeyCode.I))
         {
             PlayerAttack();
             siguienteAtaque = Time.time + 1f / ataquePorSec;
@@ -77,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
 
         AudioManager.Instance.PlaySound(attackSound);
-        
+
     }
 
     private void Movimiento()
@@ -99,17 +112,14 @@ public class PlayerController : MonoBehaviour
 
     private void Salto()
     {
-        Debug.Log("Salto");
         Debug.DrawLine(detectorSuelo.transform.position, detectorSuelo.transform.position + Vector3.down * sizeRayCast, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, sizeRayCast, LayerMask.GetMask("Suelo"));
-        if (hit.collider != null)
+        dejarSaltar = true;
+        if (Input.GetKeyDown(KeyCode.Space) && dejarSaltar)
         {
-            Debug.Log("Salto1");
-            dejarSaltar = true;
-            if (Input.GetKeyDown(KeyCode.Space) && dejarSaltar)
+            RaycastHit2D hit = Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, sizeRayCast, LayerMask.GetMask("Suelo"));
+            if (hit.collider != null)
             {
-                Debug.Log("Salto2");
                 dejarSaltar = false;
                 animator.SetBool("Idle", false);
                 playerRb.AddForce(Vector2.up * Estadisticas.Instance.jumpForce, ForceMode2D.Impulse);
@@ -118,7 +128,6 @@ public class PlayerController : MonoBehaviour
                 // Instanciar el efecto de salto
                 if (jumpEffectPrefab != null)
                 {
-                    Debug.Log("Salto3");
                     GameObject effect = Instantiate(jumpEffectPrefab, transform.position - new Vector3(0, 1.3f, 0), Quaternion.identity);
                     Destroy(effect, 2f); // Ajusta la duración para que coincida con la longitud de tu efecto de partículas
                 }
@@ -126,18 +135,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
 
-        string[] weaponTags = { "BossWeapon", "PlayerWeapon", "Kunai" };
-
-        if (weaponTags.Contains(other.gameObject.tag))
+        try
         {
-            vidaPlayer -= Estadisticas.Instance.Daño();
-            if (sliderVidaPlayer != null)
+            string[] weaponTags = { "BossWeapon", "PlayerWeapon", "Kunai" };
+
+            if (weaponTags.Contains(other.gameObject.tag))
             {
-                sliderVidaPlayer.value = vidaPlayer;
+                vidaPlayer -= Estadisticas.Instance.Daño();
+                if (sliderVidaPlayer != null)
+                {
+                    sliderVidaPlayer.value = vidaPlayer;
+                }
+                StartCoroutine(FeedbackDamage());
+                AudioManager.Instance.PlaySound(hitSound);
             }
-            AudioManager.Instance.PlaySound(hitSound);
         }
+        catch
+        {
+
+        }
+
+    }
+
+    IEnumerator FeedbackDamage()
+    {
+        spriteRenderer.material = whiteMaterial;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.material = originalMaterial;
     }
 }

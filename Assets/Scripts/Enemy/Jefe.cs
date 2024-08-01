@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,7 +31,6 @@ public class Jefe : MonoBehaviour
 
     private void Update()
     {
-        barraVidaJefe.value = vida;
         distanciaJugador = Vector2.Distance(transform.position, playerTransform.position);
         animator.SetFloat("DistaciaJugador", distanciaJugador);
         if (vida <= 0)
@@ -63,8 +63,9 @@ public class Jefe : MonoBehaviour
         if(other.gameObject.CompareTag("PlayerWeapon"))
         {
             vida -= Estadisticas.Instance.DañoAEnemigos();
+            barraVidaJefe.value = vida;
             AudioManager.Instance.PlaySound(hitSound);
-//            Debug.Log("Boss recibe golpe de player");
+            //           Debug.Log("Boss recibe golpe de player");
         }
 
     }

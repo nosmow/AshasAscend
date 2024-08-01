@@ -172,6 +172,7 @@ MonoBehaviour:
   jumpEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
   attackSound: {fileID: 8300000, guid: 57f3c0f1a6905494fa8133837bf21658, type: 3}
   hitSound: {fileID: 8300000, guid: c32f7a14c49af5e4388a721bf1d17cd6, type: 3}
+  whiteMaterial: {fileID: 2100000, guid: 8f8512a2a7b29aa44a1474ff918d402b, type: 2}
 --- !u!1 &8190207651341286905
 GameObject:
   m_ObjectHideFlags: 0
