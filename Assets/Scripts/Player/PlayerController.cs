@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public GameObject attackEffectPrefab;
     public GameObject jumpEffectPrefab;
     public AudioClip attackSound;
+    public AudioClip jumpSound;
     public AudioClip hitSound;
     private float siguienteAtaque;
     private Rigidbody2D playerRb;
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Idle", false);
                 playerRb.AddForce(Vector2.up * Estadisticas.Instance.jumpForce, ForceMode2D.Impulse);
                 animator.SetTrigger("Jump");
+                AudioManager.Instance.PlaySound(jumpSound);
 
                 // Instanciar el efecto de salto
                 if (jumpEffectPrefab != null)
