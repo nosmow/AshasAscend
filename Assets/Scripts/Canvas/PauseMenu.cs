@@ -15,7 +15,10 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        menuPauseButton.SetActive(false);
+        if (menuPauseButton != null)
+        {
+            menuPauseButton.SetActive(false);
+        }
 
         LoadVolume();
 
