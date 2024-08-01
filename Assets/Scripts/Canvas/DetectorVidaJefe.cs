@@ -10,6 +10,7 @@ public class DetectorVidaJefe : MonoBehaviour
     private PlayerController playerController;
     public GameObject panelCambioEscena;
     public GameObject panelLose;
+    public GameObject buttonPause;
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +24,13 @@ public class DetectorVidaJefe : MonoBehaviour
     {
         if(jefe.vida <= 0)
         {
+            panelPause.SetActive(false);
             panelCambioEscena.SetActive(true);
             //Time.timeScale = 0;
         }
         if(playerController.vidaPlayer <= 0)
         {
+            panelPause.SetActive(false);
             panelLose.SetActive(true);
         }
 
