@@ -184,11 +184,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4527868992974677223, guid: 33b573d1fae567a4d8147b084b331358, type: 3}
       propertyPath: jumpForce
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4527868992974677223, guid: 33b573d1fae567a4d8147b084b331358, type: 3}
       propertyPath: vidaMaxima
-      value: 90
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527868992974677223, guid: 33b573d1fae567a4d8147b084b331358, type: 3}
+      propertyPath: ataqueRecibido
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33b573d1fae567a4d8147b084b331358, type: 3}

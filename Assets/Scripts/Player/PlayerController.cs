@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+        vidaPlayer = Estadisticas.Instance.vidaMaxima;
         if (sliderVidaPlayer != null)
         {
             sliderVidaPlayer.maxValue = vidaPlayer;
