@@ -171,7 +171,7 @@ MonoBehaviour:
   attackEffectPrefab: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   jumpEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
   attackSound: {fileID: 8300000, guid: 57f3c0f1a6905494fa8133837bf21658, type: 3}
-  hitSound: {fileID: 8300000, guid: 7977e39ce0adf4c4da821fd432acf041, type: 3}
+  hitSound: {fileID: 8300000, guid: c32f7a14c49af5e4388a721bf1d17cd6, type: 3}
 --- !u!1 &8190207651341286905
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ GameObject:
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8190207651341286904
 Transform:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4, y: 0}
+  m_Offset: {x: 0.6, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!1 &8190207651727089331
