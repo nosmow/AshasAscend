@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float sizeRayCast = 0.2f;
+    public float sizeRayCast = 0.1f;
     public float speedPlayer = 5f;
     public float ataquePorSec = 1f;
     public float vidaPlayer = 100f;
@@ -99,17 +99,14 @@ public class PlayerController : MonoBehaviour
 
     private void Salto()
     {
-        Debug.Log("Salto");
         Debug.DrawLine(detectorSuelo.transform.position, detectorSuelo.transform.position + Vector3.down * sizeRayCast, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, sizeRayCast, LayerMask.GetMask("Suelo"));
-        if (hit.collider != null)
+        dejarSaltar = true;
+        if (Input.GetKeyDown(KeyCode.Space) && dejarSaltar)
         {
-            Debug.Log("Salto1");
-            dejarSaltar = true;
-            if (Input.GetKeyDown(KeyCode.Space) && dejarSaltar)
+            RaycastHit2D hit = Physics2D.Raycast(detectorSuelo.transform.position, Vector2.down, sizeRayCast, LayerMask.GetMask("Suelo"));
+            if (hit.collider != null)
             {
-                Debug.Log("Salto2");
                 dejarSaltar = false;
                 animator.SetBool("Idle", false);
                 playerRb.AddForce(Vector2.up * Estadisticas.Instance.jumpForce, ForceMode2D.Impulse);
@@ -118,7 +115,6 @@ public class PlayerController : MonoBehaviour
                 // Instanciar el efecto de salto
                 if (jumpEffectPrefab != null)
                 {
-                    Debug.Log("Salto3");
                     GameObject effect = Instantiate(jumpEffectPrefab, transform.position - new Vector3(0, 1.3f, 0), Quaternion.identity);
                     Destroy(effect, 2f); // Ajusta la duración para que coincida con la longitud de tu efecto de partículas
                 }
