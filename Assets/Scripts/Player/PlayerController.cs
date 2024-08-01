@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float sizeRayCast = 0.2f;
+    public float sizeRayCast = 0.1f;
     public float speedPlayer = 5f;
     public float ataquePorSec = 1f;
     public float vidaPlayer = 100f;
