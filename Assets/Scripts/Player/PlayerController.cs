@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Linq;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool dejarSaltar = false;
 
+    public Material whiteMaterial;
+    private Material originalMaterial;
+    private SpriteRenderer spriteRenderer;
+
+    private static bool gravityModified = false;
+
     void Start()
     {
         detectorSuelo = GameObject.Find("DetectorSuelo");
@@ -38,10 +44,17 @@ public class PlayerController : MonoBehaviour
             sliderVidaPlayer.maxValue = vidaPlayer;
             sliderVidaPlayer.value = vidaPlayer;
         }
-        
+
 
         // Ensure gravity is set
-        Physics2D.gravity *= 2;
+        if (!gravityModified)
+        {
+            Physics2D.gravity *= 2;
+            gravityModified = true;
+        }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
     }
 
     void Update()
@@ -57,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Time.time >= siguienteAtaque && Input.GetButtonDown("Fire1"))
+        if (Time.time >= siguienteAtaque && Input.GetKeyDown(KeyCode.I))
         {
             PlayerAttack();
             siguienteAtaque = Time.time + 1f / ataquePorSec;
@@ -77,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
 
         AudioManager.Instance.PlaySound(attackSound);
-        
+
     }
 
     private void Movimiento()
@@ -126,18 +139,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
 
-        string[] weaponTags = { "BossWeapon", "PlayerWeapon", "Kunai" };
-
-        if (weaponTags.Contains(other.gameObject.tag))
+        try
         {
-            vidaPlayer -= Estadisticas.Instance.Daño();
-            if (sliderVidaPlayer != null)
+            string[] weaponTags = { "BossWeapon", "PlayerWeapon", "Kunai" };
+
+            if (weaponTags.Contains(other.gameObject.tag))
             {
-                sliderVidaPlayer.value = vidaPlayer;
+                vidaPlayer -= Estadisticas.Instance.Daño();
+                if (sliderVidaPlayer != null)
+                {
+                    sliderVidaPlayer.value = vidaPlayer;
+                }
+                StartCoroutine(FeedbackDamage());
+                AudioManager.Instance.PlaySound(hitSound);
             }
-            AudioManager.Instance.PlaySound(hitSound);
         }
+        catch
+        {
+
+        }
+
+    }
+
+    IEnumerator FeedbackDamage()
+    {
+        spriteRenderer.material = whiteMaterial;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.material = originalMaterial;
     }
 }
