@@ -24,13 +24,13 @@ public class DetectorVidaJefe : MonoBehaviour
     {
         if(jefe.vida <= 0)
         {
-            panelPause.SetActive(false);
+            buttonPause.SetActive(false);
             panelCambioEscena.SetActive(true);
             //Time.timeScale = 0;
         }
         if(playerController.vidaPlayer <= 0)
         {
-            panelPause.SetActive(false);
+            buttonPause.SetActive(false);
             panelLose.SetActive(true);
         }
 
