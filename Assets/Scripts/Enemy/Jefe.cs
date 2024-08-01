@@ -64,14 +64,14 @@ public class Jefe : MonoBehaviour
         {
             vida -= Estadisticas.Instance.DañoAEnemigos();
             barraVidaJefe.value = vida;
-            AudioManager.Instance.PlaySound(hitSound);
+            AudioManager.Instance.PlaySFX(hitSound);
             //           Debug.Log("Boss recibe golpe de player");
         }
 
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlaySFX(AudioClip clip)
     {
-        AudioManager.Instance.PlaySound(clip);
+        AudioManager.Instance.PlaySFX(clip);
     }
 }

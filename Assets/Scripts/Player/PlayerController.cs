@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
             //Destroy(effect, 2f); // Adjust the duration to match your particle effect's length
         }
 
-        AudioManager.Instance.PlaySound(attackSound);
+        AudioManager.Instance.PlaySFX(attackSound);
 
     }
 
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Idle", false);
                 playerRb.AddForce(Vector2.up * Estadisticas.Instance.jumpForce, ForceMode2D.Impulse);
                 animator.SetTrigger("Jump");
-                AudioManager.Instance.PlaySound(jumpSound);
+                AudioManager.Instance.PlaySFX(jumpSound);
 
                 // Instanciar el efecto de salto
                 if (jumpEffectPrefab != null)
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
                 {
                     sliderVidaPlayer.value = vidaPlayer;
                 }
-                AudioManager.Instance.PlaySound(hitSound);
+                AudioManager.Instance.PlaySFX(hitSound);
 
                 StartCoroutine(FeedbackDamage());
 

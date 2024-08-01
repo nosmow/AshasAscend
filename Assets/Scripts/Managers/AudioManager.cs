@@ -5,7 +5,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    private AudioSource audioSource;
+    private AudioSource musicSource;
+    private AudioSource sfxSource;
     public AudioMixer audioMixer; // Reference to the AudioMixer
 
     private const string MusicVolumeKey = "musicVolume";
@@ -18,8 +19,19 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            audioSource = GetComponent<AudioSource>();
-        }
+
+            // Set up two audio sources
+            AudioSource[] sources = GetComponents<AudioSource>();
+            if (sources.Length >= 2)
+            {
+                musicSource = sources[0];
+                sfxSource = sources[1];
+            }
+            else
+            {
+                Debug.LogError("AudioManager needs two AudioSource components!");
+            }   
+           }
         else
         {
             Destroy(gameObject);
@@ -43,18 +55,33 @@ public class AudioManager : MonoBehaviour
         if (PlayerPrefs.HasKey(MusicVolumeKey))
         {
             float musicVolume = PlayerPrefs.GetFloat(MusicVolumeKey);
+            musicSource.volume = musicVolume;    
             SetVolume("music", MusicVolumeKey, musicVolume);
         }
 
         if (PlayerPrefs.HasKey(SFXVolumeKey))
         {
             float sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey);
+            sfxSource.volume = sfxVolume;
             SetVolume("sfx", SFXVolumeKey, sfxVolume);
         }
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlayMusic(AudioClip musicClip)
     {
-        audioSource.PlayOneShot(clip);
+        musicSource.clip = musicClip;
+        musicSource.loop = true;
+        musicSource.Play();
     }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+
+    public void PlaySFX(AudioClip sfxClip)
+    {
+        sfxSource.PlayOneShot(sfxClip);
+    }
+
 }
